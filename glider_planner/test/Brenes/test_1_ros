@@ -1,0 +1,63 @@
+debug = true;
+t_hysteresis = 5.0; // s
+uav_sleep = 0.5; //s
+center = 37.5187646 -5.8584809 20; // Lat(deg) Lon(deg) Alt(m)
+
+// Data related to the updraft resource manager
+urm {
+  waypoint_tolerance = 50; // m
+  debug = true;
+  waypoint = 250 20; // List of 2D points to be visited
+  waypoint = 300 420; // List of 2D points to be visited
+  waypoint = 0 470; // List of 2D points to be visited
+  waypoint = 0 20; // List of 2D points to be visited
+  waypoint = -100 270; // List of 2D points to be visited
+  
+  min_dist = 40;
+  
+  // Updraft list
+  updraft {
+    location = 150 220;
+    max_height = 220;
+    wind_speed = 4;
+    radius = 130;
+
+  }
+}
+    
+uav {
+  type = ROS; // Simulation or Real
+  initial_location = 0.0 0.0 120.0;
+  minimum_altitude = 100; // m
+  maximum_altitude = 350; // m
+  minimum_altitude_thermal = 75;
+  
+  throttle_gliding = 0;
+  throttle_thermal = 20;
+  throttle_approx = 10;
+  
+  gamma = 0.06;
+  v_ref = 25.0; // m/s
+  flight_plan {
+    waypoint = 0.0 0.0 120.0;
+    waypoint = 1000.0 -1000.0 90.0;
+  }
+  
+  param_service = /mavros/param/set;
+  flight_plan_filename = /mavros/mission/push;
+  cur_wp_service = /mavros/mission/set_current;
+  position_filename = /mavros/fix;
+  battery_topic = /mavros/battery;
+  VFR_topic = /mavros/vfr_hud;
+  center = 37.5187646 -5.8584809 20;
+  min_dist = 10; // m -->minimum change in a waypoint in order to change flight plan
+  
+  // Planner configuration
+  planner {
+    type = Tree;
+    debug = true;
+    t_hysteresis = 2.0; // s
+    depth = 3;
+  }
+  
+}

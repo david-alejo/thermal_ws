@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GliderGUI</class>
+ <widget class="QMainWindow" name="GliderGUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1652</width>
+    <height>778</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GliderGUI</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="minimumSize">
+         <size>
+          <width>791</width>
+          <height>509</height>
+         </size>
+        </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::North</enum>
+        </property>
+        <property name="currentIndex">
+         <number>3</number>
+        </property>
+        <widget class="QWidget" name="edit_tab">
+         <attribute name="title">
+          <string>Edit</string>
+         </attribute>
+         <widget class="QPlainTextEdit" name="configTextEdit">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>731</width>
+            <height>491</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="detail_tab">
+         <attribute name="title">
+          <string>Detail</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>851</width>
+            <height>521</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QTextBrowser" name="textBrowser"/>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="tableWidget">
+             <column>
+              <property name="text">
+               <string>Waypoint</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Location</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Reached?</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>UAV</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>ETA</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="graph_tab">
+         <attribute name="title">
+          <string>Graph</string>
+         </attribute>
+         <widget class="QwtPlot" name="graphPlot">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>951</width>
+            <height>631</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="map_tab">
+         <attribute name="title">
+          <string>Map</string>
+         </attribute>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="tableWidget_2">
+      <property name="minimumSize">
+       <size>
+        <width>841</width>
+        <height>161</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1500</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="rowCount">
+       <number>0</number>
+      </property>
+      <property name="columnCount">
+       <number>2</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>Location</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>FlightPlan</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1652</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionLoad"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_As"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport_Graph"/>
+    <addaction name="actionExport_Plan"/>
+    <addaction name="actionExport_Constrains"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuRun">
+    <property name="title">
+     <string>Run</string>
+    </property>
+    <addaction name="actionStart_Threads"/>
+    <addaction name="actionExecute"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionScenario_Plot"/>
+    <addaction name="actionPlan_Plot"/>
+    <addaction name="separator"/>
+    <addaction name="actionSet_Axis"/>
+    <addaction name="actionErase_Plot"/>
+    <addaction name="actionSet_Marker_Size"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuRun"/>
+   <addaction name="menuView"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionLoad">
+   <property name="text">
+    <string>&amp;Load...</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionExecute">
+   <property name="text">
+    <string>Execute</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="text">
+    <string>Save &amp;As...</string>
+   </property>
+  </action>
+  <action name="actionExport_Graph">
+   <property name="text">
+    <string>Export Plot</string>
+   </property>
+  </action>
+  <action name="actionExport_Plan">
+   <property name="text">
+    <string>Export Plan</string>
+   </property>
+  </action>
+  <action name="actionMulti_UAV">
+   <property name="text">
+    <string>Multi UAV</string>
+   </property>
+  </action>
+  <action name="actionScenario_Plot">
+   <property name="text">
+    <string>Scenario Plot</string>
+   </property>
+  </action>
+  <action name="actionGraph_Plot">
+   <property name="text">
+    <string>Graph Plot</string>
+   </property>
+  </action>
+  <action name="actionPlan_Plot">
+   <property name="text">
+    <string>Plan Plot</string>
+   </property>
+  </action>
+  <action name="actionSet_Axis">
+   <property name="text">
+    <string>Set Axis</string>
+   </property>
+  </action>
+  <action name="actionExport_Constrains">
+   <property name="text">
+    <string>Export Constrains</string>
+   </property>
+  </action>
+  <action name="actionErase_Plot">
+   <property name="text">
+    <string>Erase Plot</string>
+   </property>
+  </action>
+  <action name="actionScenario">
+   <property name="text">
+    <string>Scenario</string>
+   </property>
+  </action>
+  <action name="actionExecute_2">
+   <property name="text">
+    <string>Execute</string>
+   </property>
+  </action>
+  <action name="actionLoad_MultiUAV">
+   <property name="text">
+    <string>Load MultiUAV...</string>
+   </property>
+  </action>
+  <action name="actionSet_Marker_Size">
+   <property name="text">
+    <string>Set Marker Size</string>
+   </property>
+  </action>
+  <action name="actionStart_Threads">
+   <property name="text">
+    <string>Start Threads</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
