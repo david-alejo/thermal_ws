@@ -39,3 +39,9 @@ Thumbs.db
 # kdevelop generated files #
 .k*
 *.kdev*
+
+# CVS stuff
+/CVS/*
+*/CVS/*
+.cvsignore
+*/.cvsignore
