@@ -592,7 +592,7 @@ void glider_gui::paintPlan(const QPen &plan_pen, const simulator::FlightPlan &pl
   
     QwtPlotMarker *goal_mark = new QwtPlotMarker();
     goal_mark->setValue(vec.at(0));
-    goal_mark->setSymbol(new QwtSymbol(*init_symbol));
+    goal_mark->setSymbol(init_symbol);
     goal_mark->attach(graphPlot);
   
   
