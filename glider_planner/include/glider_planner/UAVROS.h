@@ -27,13 +27,13 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/NavSatFix.h>
-#include <mavros/Waypoint.h>
-#include <mavros/WaypointList.h>
-#include <mavros/WaypointPush.h>
-#include <mavros/WaypointSetCurrent.h>
-#include <mavros/ParamSet.h>
-#include <mavros/BatteryStatus.h>
-#include <mavros/VFR_HUD.h>
+#include <mavros_msgs/Waypoint.h>
+#include <mavros_msgs/WaypointList.h>
+#include <mavros_msgs/WaypointPush.h>
+#include <mavros_msgs/WaypointSetCurrent.h>
+#include <mavros_msgs/ParamSet.h>
+#include <mavros_msgs/BatteryStatus.h>
+#include <mavros_msgs/VFR_HUD.h>
 
 namespace glider_planner {
 
@@ -74,12 +74,12 @@ protected:
     virtual bool init(ParseBlock& block);
     
     void stateCallback(const sensor_msgs::NavSatFix& pose);
-    void batteryCallback(const mavros::BatteryStatus& battery);
-    void VFRCallback(const mavros::VFR_HUD& state);
+    void batteryCallback(const mavros_msgs::BatteryStatus& battery);
+    void VFRCallback(const mavros_msgs::VFR_HUD& state);
     
-    mavros::WaypointList toMavRos(const UAVFlightPlan::UAVFlightPlan &fp, bool &in_updraft) const;
+    mavros_msgs::WaypointList toMavRos(const UAVFlightPlan::UAVFlightPlan &fp, bool &in_updraft) const;
     
-    mavros::Waypoint jumpCommand(uint target_id, uint n_times) const;
+    mavros_msgs::Waypoint jumpCommand(uint target_id, uint n_times) const;
     
     
     
@@ -106,8 +106,8 @@ protected:
     double throttle_percentage, thr_thermal, thr_gliding, thr_approach;
     double min_dist;
     uint max_retries;
-    mavros::BatteryStatus battery; // Last received battery status
-    mavros::VFR_HUD status;
+    mavros_msgs::BatteryStatus battery; // Last received battery status
+    mavros_msgs::VFR_HUD status;
 };
 
 }

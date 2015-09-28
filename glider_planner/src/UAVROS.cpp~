@@ -19,7 +19,7 @@
 
 
 #include "glider_planner/UAVROS.h"
-#include <mavros_msgs/Waypoint.h>
+#include <mavros/Waypoint.h>
 #include "UAVFlightPlan/UAVFlightPlan.h"
 #include <iostream>
 #include <boost/function.hpp>
@@ -47,18 +47,18 @@ UAV* UAVROS::clone() const
   uav_real.battery_topic = battery_topic;
   uav_real.VFR_topic = VFR_topic;
   uav_real.center = center;
-  uav_real.waypoint_client = n.serviceClient<mavros_msgs::WaypointPush>(flight_plan_filename);
-  uav_real.cur_wp_client = n.serviceClient<mavros_msgs::WaypointSetCurrent &>(cur_wp_service);
-  uav_real.param_client = n.serviceClient<mavros_msgs::ParamSet &>(param_service);
+  uav_real.waypoint_client = n.serviceClient<mavros::WaypointPush>(flight_plan_filename);
+  uav_real.cur_wp_client = n.serviceClient<mavros::WaypointSetCurrent &>(cur_wp_service);
+  uav_real.param_client = n.serviceClient<mavros::ParamSet &>(param_service);
   boost::function<void (const sensor_msgs::NavSatFix &)> fun = 
 			      boost::bind(&UAVROS::stateCallback, dynamic_cast<UAVROS*>(new_uav), _1);
   uav_real.state_subscriber = n.subscribe<sensor_msgs::NavSatFix &>(position_filename, 1, fun);
-  boost::function<void (const mavros_msgs::BatteryStatus &)> fun_bat = 
+  boost::function<void (const mavros::BatteryStatus &)> fun_bat = 
 			      boost::bind(&UAVROS::batteryCallback, dynamic_cast<UAVROS*>(new_uav), _1);
-  boost::function<void (const mavros_msgs::VFR_HUD &)> fun_vfr = 
+  boost::function<void (const mavros::VFR_HUD &)> fun_vfr = 
 			      boost::bind(&UAVROS::VFRCallback, dynamic_cast<UAVROS*>(new_uav), _1);
-  uav_real.battery_subscriber = n.subscribe<mavros_msgs::BatteryStatus &>(battery_topic, 1, fun_bat);
-  uav_real.VFR_subscriber =n.subscribe<mavros_msgs::VFR_HUD &>(VFR_topic,1,fun_vfr);
+  uav_real.battery_subscriber = n.subscribe<mavros::BatteryStatus &>(battery_topic, 1, fun_bat);
+  uav_real.VFR_subscriber =n.subscribe<mavros::VFR_HUD &>(VFR_topic,1,fun_vfr);
   
   uav_real.qgc_version = qgc_version;
   
@@ -118,9 +118,9 @@ void UAVROS::setFlightPlan(const simulator::FlightPlan& new_plan)
     if (actualize) {
       
       // Publish the plan to the mavros module!
-      mavros_msgs::WaypointPush srv;
+      mavros::WaypointPush srv;
       srv.request.waypoints = toMavRos(uav_plan, in_updraft).waypoints;
-      mavros_msgs::WaypointSetCurrent srv_current;
+      mavros::WaypointSetCurrent srv_current;
       srv_current.request.wp_seq = 0;
       uint max_req = max_retries;
       while ( (!waypoint_client.call(srv) || !srv.response.success) && max_req > 0) {
@@ -163,7 +163,7 @@ bool UAVROS::setThrMaxRetry(double thr)
   
   if (throttle_percentage != thr) {
     ROS_INFO("Changing THR_MAX to %f", thr);
-    mavros_msgs::ParamSet srv_param;
+    mavros::ParamSet srv_param;
     srv_param.request.param_id = throttle_param_name;
     srv_param.request.value.integer = (uint64_t)thr;
     srv_param.request.value.real = thr;
@@ -255,18 +255,18 @@ bool UAVROS::init(ParseBlock& block)
       }
       
       // ROS connections
-      waypoint_client = n.serviceClient<mavros_msgs::WaypointPush>(flight_plan_filename);
-      cur_wp_client = n.serviceClient<mavros_msgs::WaypointSetCurrent>(cur_wp_service);
-      param_client = n.serviceClient<mavros_msgs::ParamSet &>(param_service);
+      waypoint_client = n.serviceClient<mavros::WaypointPush>(flight_plan_filename);
+      cur_wp_client = n.serviceClient<mavros::WaypointSetCurrent>(cur_wp_service);
+      param_client = n.serviceClient<mavros::ParamSet &>(param_service);
       boost::function<void (const sensor_msgs::NavSatFix &)> fun = 
 			      boost::bind(&UAVROS::stateCallback, this, _1);
-      boost::function<void (const mavros_msgs::BatteryStatus &)> fun_bat = 
+      boost::function<void (const mavros::BatteryStatus &)> fun_bat = 
 			      boost::bind(&UAVROS::batteryCallback, this, _1);
-      boost::function<void (const mavros_msgs::VFR_HUD &)> fun_vfr = 
+      boost::function<void (const mavros::VFR_HUD &)> fun_vfr = 
 			      boost::bind(&UAVROS::VFRCallback, this, _1);
       state_subscriber = n.subscribe<sensor_msgs::NavSatFix &>(position_filename, 1, fun);
-      battery_subscriber = n.subscribe<mavros_msgs::BatteryStatus &>(battery_topic, 1, fun_bat);
-      VFR_subscriber =n.subscribe<mavros_msgs::VFR_HUD &>(VFR_topic,1,fun_vfr);
+      battery_subscriber = n.subscribe<mavros::BatteryStatus &>(battery_topic, 1, fun_bat);
+      VFR_subscriber =n.subscribe<mavros::VFR_HUD &>(VFR_topic,1,fun_vfr);
       std::vector<double> vec;
       vec = block("center").as<vector<double> >();
       EarthLocation e(vec.at(0),vec.at(1),vec.at(2));
@@ -295,23 +295,23 @@ void UAVROS::stateCallback(const sensor_msgs::NavSatFix& state)
    trajectory.push_back(current_location);
 }
 
-void UAVROS::batteryCallback(const mavros_msgs::BatteryStatus& battery)
+void UAVROS::batteryCallback(const mavros::BatteryStatus& battery)
 {
   this->battery = battery;
 }
-void UAVROS::VFRCallback(const mavros_msgs::VFR_HUD& state)
+void UAVROS::VFRCallback(const mavros::VFR_HUD& state)
 {
   this->status=state;
 }
 
 
 
-mavros_msgs::WaypointList UAVROS::toMavRos(const UAVFlightPlan::UAVFlightPlan &fp, bool &in_updraft) const
+mavros::WaypointList UAVROS::toMavRos(const UAVFlightPlan::UAVFlightPlan &fp, bool &in_updraft) const
 {
-  mavros_msgs::WaypointList ret;
+  mavros::WaypointList ret;
   in_updraft = false;
   UAVFlightPlan::UAVFlightPlan::const_iterator it = fp.begin();
-  mavros_msgs::Waypoint w_mav;
+  mavros::Waypoint w_mav;
   for (unsigned int way_id = 0; it != fp.end(); way_id++, it++) {
     const UAVFlightPlan::UAVWaypoint &w = *it;
   
@@ -331,7 +331,7 @@ mavros_msgs::WaypointList UAVROS::toMavRos(const UAVFlightPlan::UAVFlightPlan &f
       ret.waypoints.push_back(w_mav);
       way_id++;
       // Then the jump
-      mavros_msgs::Waypoint w_mav_jump = jumpCommand(way_id + 2, 10);
+      mavros::Waypoint w_mav_jump = jumpCommand(way_id + 2, 10);
       ret.waypoints.push_back(w_mav_jump);
       way_id++;
       // Last the loiter
@@ -342,19 +342,19 @@ mavros_msgs::WaypointList UAVROS::toMavRos(const UAVFlightPlan::UAVFlightPlan &f
   }
   
   if (fp.getLoop() && fp.size() > 0) {
-    mavros_msgs::Waypoint w_mav_jump = jumpCommand(0, 10);
+    mavros::Waypoint w_mav_jump = jumpCommand(0, 10);
     ret.waypoints.push_back(w_mav_jump);
     
-    mavros_msgs::Waypoint w_mav_finish = w_mav; // Include a dummy waypoint
+    mavros::Waypoint w_mav_finish = w_mav; // Include a dummy waypoint
     ret.waypoints.push_back(w_mav_finish);
   }
   
   return ret;
 }
 
-mavros_msgs::Waypoint UAVROS::jumpCommand(uint target_id, uint n_times) const
+mavros::Waypoint UAVROS::jumpCommand(uint target_id, uint n_times) const
 {
-  mavros_msgs::Waypoint w;
+  mavros::Waypoint w;
   
   w.command = UAVFlightPlan::UAVWaypoint::MAV_DO_JUMP;
   w.param1 = target_id;

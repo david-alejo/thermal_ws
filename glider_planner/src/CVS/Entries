@@ -1,0 +1,18 @@
+/BasicState.cpp/1.1.2.5/Mon Oct  6 12:03:31 2014//Tgrvc
+/CompleteSystem.cpp/1.1.2.16/Thu Feb  5 18:00:29 2015//Tgrvc
+/ExpandingTreePlanner.cpp/1.1.2.14/Thu Feb  5 12:52:53 2015//Tgrvc
+/Planner.cpp/1.1.1.23/Mon Oct  6 12:03:31 2014//Tgrvc
+/SoaringPlanner.cpp/1.1.2.5/Mon Oct  6 12:03:31 2014//Tgrvc
+/SoaringPlannerFactory.cpp/1.1.2.4/Mon Oct  6 12:03:31 2014//Tgrvc
+/TemporalConstrain.cpp/1.1.2.6/Mon Oct  6 12:03:31 2014//Tgrvc
+/ThermalDetector.cpp/1.1.2.2/Mon Oct  6 12:03:31 2014//Tgrvc
+/ThreadUAV.cpp/1.1.2.14/Thu Feb  5 18:00:29 2015//Tgrvc
+/TimeSlot.cpp/1.1.2.5/Mon Oct  6 12:03:31 2014//Tgrvc
+/TreeState.cpp/1.1.2.6/Mon Oct  6 12:03:31 2014//Tgrvc
+/UAV.cpp/1.1.2.11/Thu Feb  5 18:00:29 2015//Tgrvc
+/UAVFactory.cpp/1.1.2.5/Mon Oct  6 12:03:31 2014//Tgrvc
+/UAVROS.cpp/1.1.2.20/Fri Feb 13 17:55:19 2015//Tgrvc
+/UAVReal.cpp/1.1.2.6/Mon Oct  6 12:03:31 2014//Tgrvc
+/UAVSimulation.cpp/1.1.2.10/Mon Oct  6 12:03:31 2014//Tgrvc
+/URM.cpp/1.1.2.20/Thu Feb  5 12:52:53 2015//Tgrvc
+D/exec////
