@@ -1,8 +1,0 @@
-Multi UAV Glider planner project v 0.1.0
-
-Ago 2012
-
-Implemented the Expanding Tree Planner with real and simulated UAVs
-
-Oct 2014
- Migrated to ROS Hydro, integrated with mavros and pending HIL and experimental tests.
