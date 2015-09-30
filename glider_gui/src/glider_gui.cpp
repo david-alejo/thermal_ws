@@ -77,7 +77,14 @@ glider_gui::glider_gui()
     // Set the map
     map_widget = new Marble::MarbleWidget(map_tab);
     map_widget->setProjection(Marble::Mercator);
-    map_widget->setMapThemeId("earth/googlesat/googlesat.dgml");
+    map_widget->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
+    
+    // Connections for changing the map style
+    connect(actionBing, SIGNAL(triggered()), this, SLOT(setBingMap()));
+    connect(actionGoogle_Maps, SIGNAL(triggered()), SLOT(setGoogleMapsMap()));
+    connect(actionGoogle_Satellite, SIGNAL(triggered()), SLOT(setGoogleSatMap()));
+    connect(actionOpen_Street_Map, SIGNAL(triggered()), SLOT(setOpenStreetMap()));
+    
     
     // Create a horizontal zoom slider and set the default zoom
     QSlider * zoomSlider = new QSlider(Qt::Horizontal);
@@ -754,7 +761,22 @@ void glider_gui::updateUAVPlacemark(GeoDataCoordinates coord, unsigned int i)
   
 }
 
+void glider_gui::setBingMap()
+{
+  map_widget->setMapThemeId("earth/virtualearth/virtualearth.dgml");
+}
 
+void glider_gui::setGoogleMapsMap()
+{
+  map_widget->setMapThemeId("earth/googlemaps/googlemaps.dgml");
+}
 
+void glider_gui::setGoogleSatMap()
+{
+  map_widget->setMapThemeId("earth/googlesat/googlesat.dgml");
+}
 
-    
+void glider_gui::setOpenStreetMap()
+{
+  map_widget->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
+}

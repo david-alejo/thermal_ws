@@ -197,12 +197,23 @@
     <property name="title">
      <string>View</string>
     </property>
+    <widget class="QMenu" name="menuChange_Map_Type">
+     <property name="title">
+      <string>Change Map Type</string>
+     </property>
+     <addaction name="actionBing"/>
+     <addaction name="actionGoogle_Maps"/>
+     <addaction name="actionGoogle_Satellite"/>
+     <addaction name="actionOpen_Street_Map"/>
+    </widget>
     <addaction name="actionScenario_Plot"/>
     <addaction name="actionPlan_Plot"/>
     <addaction name="separator"/>
     <addaction name="actionSet_Axis"/>
     <addaction name="actionErase_Plot"/>
     <addaction name="actionSet_Marker_Size"/>
+    <addaction name="separator"/>
+    <addaction name="menuChange_Map_Type"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuRun"/>
@@ -322,6 +333,26 @@
   <action name="actionStart_Threads">
    <property name="text">
     <string>Start Threads</string>
+   </property>
+  </action>
+  <action name="actionGoogle_Maps">
+   <property name="text">
+    <string>Google Maps</string>
+   </property>
+  </action>
+  <action name="actionGoogle_Satellite">
+   <property name="text">
+    <string>Google Satellite</string>
+   </property>
+  </action>
+  <action name="actionOpen_Street_Map">
+   <property name="text">
+    <string>Open Street Map</string>
+   </property>
+  </action>
+  <action name="actionBing">
+   <property name="text">
+    <string>Bing</string>
    </property>
   </action>
  </widget>

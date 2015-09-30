@@ -77,7 +77,10 @@ public slots:
      void plotPlan();
      void setUserAxis();
      void getMarkerSize();
-     
+     void setBingMap();
+     void setGoogleMapsMap();
+     void setGoogleSatMap();
+     void setOpenStreetMap();
     
 private:
     CompleteSystemGui *system;
