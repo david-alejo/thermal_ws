@@ -1,0 +1,216 @@
+debug = true;
+t_hysteresis = 5.0; // s
+uav_sleep = 2.0; //s
+center = 37.4262360384338 -6.003604811854007 13; // Lat(deg) Lon(deg) Alt(m)
+
+// Data related to the updraft resource manager
+urm {
+  debug = true;
+  waypoint_tolerance = 50;
+  waypoint = 1000 0; // List of 2D points to be visited
+  waypoint = 1250 250;
+  waypoint = 0 -1000;
+  waypoint = 500 1100;
+   waypoint = 0 1000;
+   waypoint = 750 1000;
+   waypoint = -800 1000;
+   waypoint = -1000 -1000;
+   waypoint = 900 -1000;
+   waypoint = -750 -500;
+  min_dist = 5; // Minimum altitude distance between two aircrafts inside a thermal
+  
+  // Updraft list
+  updraft {
+    location = 750 500;
+    max_height = 300;
+    wind_speed = 3;
+  }
+  
+  updraft {
+    location = -500 -450;
+    max_height = 300;
+    wind_speed = 3;
+  }
+}
+
+uav {
+  type = Simulation; // Simulation or Real
+  initial_location = 0.0 0.0 100.0;
+  minimum_altitude = 50; // m
+  maximum_altitude = 200; // m
+  gamma = 0.05;
+  v_ref = 20.0; // m/s
+  flight_plan {
+    waypoint = 0.0 0.0 100.0;
+    waypoint = 1000.0 1000.0 90.0;
+  }
+  
+  n_steps = 20;
+  particle { // Necessary in simulation UAV
+	id = First_UAV; // A string that identifies the uav
+	particle_type = ParticleSimple; // The only particle implemented so far.
+	
+	model {
+		model_type = ModelSimpleGlider; // The only model implemented so far
+		parameters = 20.5 0.5 0.05; // v_ref alpha_theta descending_angle(rad)
+		initial_conditions = 0 0 100.0 0.0; // x y z theta
+		T = 0.1;
+		
+		// Updraft list
+		updraft {
+		  location = 750 500;
+		  max_height = 300;
+		  wind_speed = 3; // m/s
+		}
+  
+		updraft {
+    location = -500 -450;
+    max_height = 300;
+    wind_speed = 3;
+  }
+	}
+
+	controller {
+		controller_type = ControllerSimpleGlider; 
+		speed = 20.5;
+		flight_plan {
+			waypoint = 0.0 0.0 100.0;
+			waypoint = 1000.0 1000.0 90.0;
+		}
+		altitude_flag = true;
+		z_tolerance = 10.0;
+	}
+	weight = 1.0; // Useless so far.
+	geometry = 4.0 4.0 1.0;
+  }
+  
+  // Planner configuration
+  planner {
+    type = Tree;
+    debug = true;
+    t_hysteresis = 2.0; // s
+    depth = 3;
+  }
+  
+}
+
+
+uav {
+  type = Simulation; // Simulation or Real
+  initial_location = 1500.0 1000.0 150.0;
+  minimum_altitude = 50; // m
+  maximum_altitude = 200; // m
+  gamma = 0.05;
+  v_ref = 20.0; // m/s
+  flight_plan {
+    waypoint = 1500.0 1000.0 150.0;
+    waypoint = 300.0 300.0 80.0;
+  }
+  n_steps = 20;
+  
+  particle { // Necessary in simulation UAV
+	id = First_UAV; // A string that identifies the uav
+	particle_type = ParticleSimple; // The only particle implemented so far.
+	
+	model {
+		model_type = ModelSimpleGlider; // The only model implemented so far
+		parameters = 20.5 0.5 0.05; // v_ref alpha_theta descending_angle(rad)
+		initial_conditions = 1500 1000 150.0 0.0; // x y z theta
+		T = 0.1;
+		updraft {
+		  location = 750 500;
+		  max_height = 300;
+		  wind_speed = 3; // m/s
+		}
+
+		updraft {
+    location = -500 -450;
+    max_height = 300;
+    wind_speed = 3;
+  }
+		
+	}
+
+	controller {
+		controller_type = ControllerSimpleGlider; 
+		speed = 20.5;
+		flight_plan {
+			waypoint = 0.0 0.0 100.0;
+			waypoint = 1000.0 1000.0 90.0;
+		}
+		altitude_flag = true;
+		z_tolerance = 10.0;
+	}
+	weight = 1.0; // Useless so far.
+	geometry = 4.0 4.0 1.0;
+  }
+  
+  // Planner configuration
+  planner {
+    type = Tree;
+    debug = true;
+    t_hysteresis = 2.0; // s
+    depth = 3;
+  }
+  
+}
+
+uav {
+  type = Simulation; // Simulation or Real
+  initial_location = -1500.0 -1200.0 150.0;
+  minimum_altitude = 50; // m
+  maximum_altitude = 300; // m
+  gamma = 0.05;
+  v_ref = 20.0; // m/s
+  flight_plan {
+    waypoint = -1500.0 -1200.0 150.0;
+    waypoint = 300.0 300.0 80.0;
+  }
+  n_steps = 20;
+  
+  particle { // Necessary in simulation UAV
+	id = First_UAV; // A string that identifies the uav
+	particle_type = ParticleSimple; // The only particle implemented so far.
+	
+	model {
+		model_type = ModelSimpleGlider; // The only model implemented so far
+		parameters = 20.5 0.5 0.05; // v_ref alpha_theta descending_angle(rad)
+		initial_conditions = -1500.0 -1200.0 150.0 0.0; // x y z theta
+		T = 0.1;
+		updraft {
+		  location = 750 500;
+		  max_height = 300;
+		  wind_speed = 3; // m/s
+		}
+
+		updraft {
+    location = -500 -450;
+    max_height = 300;
+    wind_speed = 3;
+  }
+		
+	}
+
+	controller {
+		controller_type = ControllerSimpleGlider; 
+		speed = 20.5;
+		flight_plan {
+			waypoint = -1500.0 -1200.0 150.0;
+			waypoint = 1000.0 -1200.0 90.0;
+		}
+		altitude_flag = true;
+		z_tolerance = 10.0;
+	}
+	weight = 1.0; // Useless so far.
+	geometry = 4.0 4.0 1.0;
+  }
+  
+  // Planner configuration
+  planner {
+    type = Tree;
+    debug = true;
+    t_hysteresis = 2.0; // s
+    depth = 3;
+  }
+  
+}

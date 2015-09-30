@@ -1,0 +1,86 @@
+debug = true;
+t_hysteresis = 5.0; // s
+uav_sleep = 0.5; //s
+center = 37.5187646 -5.8584809 20; // Lat(deg) Lon(deg) Alt(m)
+
+// Data related to the updraft resource manager
+urm {
+  waypoint_tolerance = 30; // m
+  debug = true;
+  waypoint = 250 20; // List of 2D points to be visited
+  waypoint = 300 420; // List of 2D points to be visited
+  waypoint = 0 470; // List of 2D points to be visited
+  waypoint = 0 20; // List of 2D points to be visited
+  waypoint = 150 220; // List of 2D points to be visited
+  waypoint = -100 300; // List of 2D points to be visited
+  
+  min_dist = 40;
+  
+  // Updraft list
+  updraft {
+    location = 150 220;
+    max_height = 220;
+    wind_speed = 4;
+    radius = 80;
+
+  }
+}
+    
+uav {
+  type = ROS; // Simulation or Real
+  initial_location = 0.0 0.0 120.0;
+  minimum_altitude = 50; // m
+  maximum_altitude = 350; // m
+  gamma = 0.1177;
+  v_ref = 15.0; // m/s
+  flight_plan {
+    waypoint = 0.0 0.0 120.0;
+    waypoint = 1000.0 -1000.0 90.0;
+  }
+  
+  param_service = /mavros/param/set;
+  flight_plan_filename = /mavros/mission/push;
+  cur_wp_service = /mavros/mission/set_current;
+  position_filename = /mavros/fix;
+  battery_topic = /mavros/battery;
+  VFR_topic = /mavros/vfr_hud;
+  center = 37.5187646 -5.8584809 20;
+  
+  // Planner configuration
+  planner {
+    type = Tree;
+    debug = true;
+    t_hysteresis = 2.0; // s
+    depth = 3;
+  }
+  
+}
+uav {
+  type = ROS; // Simulation or Real
+  initial_location = 0.0 0.0 120.0;
+  minimum_altitude = 50; // m
+  maximum_altitude = 350; // m
+  gamma = 0.1177;
+  v_ref = 15.0; // m/s
+  flight_plan {
+    waypoint = 0.0 0.0 120.0;
+    waypoint = 1000.0 -1000.0 90.0;
+  }
+  
+  param_service = /mavros2/param/set;
+  flight_plan_filename = /mavros2/mission/push;
+  cur_wp_service = /mavros2/mission/set_current;
+  position_filename = /mavros2/fix;
+  battery_topic = /mavros2/battery;
+  VFR_topic = /mavros2/vfr_hud;
+  center = 37.5187646 -5.8584809 20;
+  
+  // Planner configuration
+  planner {
+    type = Tree;
+    debug = true;
+    t_hysteresis = 2.0; // s
+    depth = 3;
+  }
+  
+}
