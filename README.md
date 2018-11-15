@@ -16,11 +16,12 @@ In order to make it work, some dependencies have to be met:
 
 Configuring the marble maps:
 
-- Marble is both a GUI for maps visualization and a library for including a map visualization in an external application. Several maps can be installed by applying:
-- Cloning the repositories inside https://gitlab.com/groups/marble-restricted-maps into ~/.local/share/marble/maps/earth/
+- Marble is both a GUI for maps visualization and a library for including a map visualization in an external application. Several maps can be installed by cloning the repositories inside https://gitlab.com/groups/marble-restricted-maps into ~/.local/share/marble/maps/earth/
+
 For example:
 
 > cd ~/.local/share/marble/maps/earth/
+
 > git clone https://gitlab.com/marble-restricted-maps/virtualearth.git
 
 Please test that the maps are available in the Marble Application and displaying ok.
