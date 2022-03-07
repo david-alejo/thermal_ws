@@ -86,6 +86,17 @@ target_link_libraries(${lidar_target}
     ignition-transport${IGN_TRANSPORT_VER}::ignition-transport${IGN_TRANSPORT_VER}
 )
 
+set(radar_sources Radar.cc)
+ign_add_component(radar SOURCES ${radar_sources} GET_TARGET_NAME radar_target)
+target_compile_definitions(${radar_target} PUBLIC Radar_EXPORTS)
+target_link_libraries(${radar_target}
+  PUBLIC
+    ${rendering_target}
+  PRIVATE
+    ignition-msgs${IGN_MSGS_VER}::ignition-msgs${IGN_MSGS_VER}
+    ignition-transport${IGN_TRANSPORT_VER}::ignition-transport${IGN_TRANSPORT_VER}
+)
+
 set(gpu_lidar_sources GpuLidarSensor.cc)
 ign_add_component(gpu_lidar SOURCES ${gpu_lidar_sources} GET_TARGET_NAME gpu_lidar_target)
 target_compile_definitions(${gpu_lidar_target} PUBLIC GpuLidarSensor_EXPORTS)
@@ -94,6 +105,16 @@ target_link_libraries(${gpu_lidar_target}
     ignition-msgs${IGN_MSGS_VER}::ignition-msgs${IGN_MSGS_VER}
     ignition-transport${IGN_TRANSPORT_VER}::ignition-transport${IGN_TRANSPORT_VER}
     ${lidar_target}
+)
+
+set(gpu_radar_sources GpuRadarSensor.cc)
+ign_add_component(gpu_radar SOURCES ${gpu_radar_sources} GET_TARGET_NAME gpu_radar_target)
+target_compile_definitions(${gpu_radar_target} PUBLIC GpuRadarSensor_EXPORTS)
+target_link_libraries(${gpu_radar_target}
+  PRIVATE
+    ignition-msgs${IGN_MSGS_VER}::ignition-msgs${IGN_MSGS_VER}
+    ignition-transport${IGN_TRANSPORT_VER}::ignition-transport${IGN_TRANSPORT_VER}
+    ${radar_target}
 )
 
 set(logical_camera_sources LogicalCameraSensor.cc)

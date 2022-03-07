@@ -189,6 +189,10 @@ namespace ignition
       /// \sa NavSat
       NAVSAT_VERTICAL_VELOCITY_NOISE = 24,
 
+      /// \brief Noise streams for the Radar sensor
+      /// \sa Radar
+      RADAR_NOISE = 14,
+
       /// \internal
       /// \brief Indicator used to create an iterator over the enum. Do not
       /// use this.
