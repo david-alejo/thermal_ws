@@ -258,7 +258,6 @@ bool GpuRadarSensor::Update(const std::chrono::steady_clock::duration &_now)
       auto n = _scene->NodeByIndex(i);
       if (n != NULL)  {
         auto name = _scene->NodeByIndex(i)->Name();
-        std::cout << "Node " << i << " Node name: " << name << std::endl;
         
         if (name.find("emitter") != std::string::npos) {
           pos_vec.push_back(n->LocalPosition());
