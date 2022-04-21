@@ -233,6 +233,16 @@ namespace ignition
       /// \return Vertical field of view.
       public: double VertFOV() const;
 
+      public: int HorizontalMeasures() const;
+
+      public: void SetHorizontalMeasures(int h_measures);
+
+      public: int VerticalMeasures() const;
+
+      public: void SetVerticalMeasures(int v_measures);
+
+      public: double VMeasures() const;
+
       // Documentation inherited
       public: virtual bool IsActive() const;
 

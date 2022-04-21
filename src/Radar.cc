@@ -403,6 +403,28 @@ void Radar::SetVerticalAngleMax(const double _angle)
 }
 
 //////////////////////////////////////////////////
+int Radar::HorizontalMeasures() const
+{
+  return this->dataPtr->sdfRadar.HMeasures();
+}
+
+void Radar::SetHorizontalMeasures(int h_meas) 
+{
+  this->dataPtr->sdfRadar.SetHMeasures(h_meas);
+}
+
+//////////////////////////////////////////////////
+int Radar::VerticalMeasures() const
+{
+  return this->dataPtr->sdfRadar.VMeasures();
+}
+
+void Radar::SetVerticalMeasures(int v_meas) 
+{
+  this->dataPtr->sdfRadar.SetVMeasures(v_meas);
+}
+
+//////////////////////////////////////////////////
 void Radar::Ranges(std::vector<double> &_ranges) const
 {
   std::lock_guard<std::mutex> lock(this->radarMutex);

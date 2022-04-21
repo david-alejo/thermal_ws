@@ -56,6 +56,8 @@ class ignition::sensors::GpuRadarSensorPrivate
 
   /// \brief Publisher for the publish point cloud message.
   public: transport::Node::Publisher pointPub;
+
+  public: int h_measures, v_measures;
 };
 
 //////////////////////////////////////////////////
@@ -248,11 +250,8 @@ bool GpuRadarSensor::Update(const std::chrono::steady_clock::duration &_now)
   std::vector<math::Vector3d> pos_vec;
   std::vector<int> index_vec;
   math::Vector3d p(1e10,1e10,1e10);
-  std::cout << "Scene: Node Count " << _scene->NodeCount() << std::endl;
-    // auto node = _scene->RootNode();
-    // std::cout << "Root node name: " << node->Name() << std::endl;
-    // std::cout << "N childs: " << node->ChildCount() << std::endl;
-
+  // std::cout << "Scene: Node Count " << _scene->NodeCount() << std::endl;
+    
 
     for (unsigned int i = 0; i < _scene->NodeCount(); i++) {
       auto n = _scene->NodeByIndex(i);
@@ -333,6 +332,10 @@ ignition::math::Angle GpuRadarSensor::VFOV() const
 }
 
 //////////////////////////////////////////////////
+
+// The point cloud of the RADAR is not the full point cloud.
+// Rather, we keep the closest point of each region of the original LiDAR pointcloud
+// Therefore, we 
 void GpuRadarSensorPrivate::FillPointCloudMsg(const float *_laserBuffer)
 {
   IGN_PROFILE("GpuRadarSensorPrivate::FillPointCloudMsg");
