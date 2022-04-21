@@ -157,6 +157,13 @@ if (EXISTS "${CMAKE_SOURCE_DIR}/subscriber_raw.cc")
   )
 endif()
 
+if (EXISTS "${CMAKE_SOURCE_DIR}/subscriber_stats_to_clock.cc")
+  add_executable(subscriber_stats_to_clock subscriber_stats_to_clock.cc)
+  target_link_libraries(subscriber_stats_to_clock
+    ignition-transport${IGN_TRANSPORT_VER}::core
+  )
+endif()
+
 # Logging examples.
 if (TARGET ignition-transport${IGN_TRANSPORT_VER}::log)
 
